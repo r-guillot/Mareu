@@ -10,8 +10,8 @@
         android:id="@+id/image_meeting"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_circle"
+        android:layout_margin="15dp"
         />
 
     <TextView
@@ -29,9 +29,13 @@
         android:layout_height="25dp"
         android:layout_below="@+id/text_meeting_info"
         android:layout_toEndOf="@+id/image_meeting"
+        android:maxLines="1"
+
+        android:ellipsize="end"
         />
 
     <ImageButton
+        android:id="@+id/trash_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/delete_button"

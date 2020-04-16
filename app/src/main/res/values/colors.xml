@@ -6,4 +6,14 @@
     <color name="white">#FFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="gray">#D3D3D3</color>
+    <color name="transparent">#00ff001C</color>
+
+<!--    random color-->
+    <color name="pink_pastel">#FFEFD5</color>
+    <color name="yellow_pastel">#FFFACD</color>
+    <color name="green_pastel">#98FB98</color>
+    <color name="turquoise__pastel">#AFEEEE</color>
+    <color name="blue_pastel">#ADD8E6</color>
+    <color name="lavender_pastel">#E6E6FA</color>
+    <color name="salmon__pastel">#FFA07A</color>
 </resources>

@@ -45,7 +45,7 @@ public class MeetingFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_meeting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mAdapter = new MyMeetingRecyclerViewAdapter(mMeetings);
+        mAdapter = new MyMeetingRecyclerViewAdapter(mMeetings,context);
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }

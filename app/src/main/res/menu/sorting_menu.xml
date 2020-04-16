@@ -8,6 +8,19 @@
         />
 
     <item android:id="@+id/sort_place"
-        android:title="@string/sort_location"
-        />
+        android:title="@string/sort_location" >
+
+        <menu >
+            <item android:id="@+id/reu_a"
+                android:title="@string/reu_a" />
+
+            <item android:id="@+id/reu_b"
+                android:title="@string/reu_b" />
+
+            <item android:id="@+id/reu_c"
+                android:title="@string/reu_c" />
+
+        </menu>
+
+        </item>
 </menu>

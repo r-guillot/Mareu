@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Maréu</string>
-    <string name="sort_date">Trier par Date</string>
-    <string name="sort_location">Trier par Lieu</string>
+    <string name="sort_date">Filtrer par Date</string>
+    <string name="sort_location">Filtrer par Salle</string>
     <string name="name_activity">Ma réu</string>
     <string name="add_place">Salle de Réunion</string>
     <string name="add_hour">Heure</string>
     <string name="add_topic">Sujet</string>
     <string name="add_participants">Participant</string>
+    <string name="reu_a">Réunion A</string>
+    <string name="reu_b">Réunion B</string>
+    <string name="reu_c">Réunion C</string>
 </resources>

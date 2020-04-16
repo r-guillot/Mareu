@@ -4,23 +4,36 @@ public class Meeting {
 
  private double hour;
 
+ private int date;
+
  private String place;
 
  private String topic;
 
  private String participant;
 
-    public Meeting(double hour, String place, String topic, String participant) {
+    public Meeting(int date, double hour, String place, String topic, String participant) {
+        this.date = date;
         this.hour = hour;
         this.place = place;
         this.topic = topic;
         this.participant = participant;
     }
 
-    public void meetingInfo (double hour, String place, String topic) {
+
+    public void meetingInfo (int date, double hour, String place, String topic) {
+        this.date = date;
         this.hour = hour;
         this.place = place;
         this.topic = topic;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
     }
 
     public double getHour() {

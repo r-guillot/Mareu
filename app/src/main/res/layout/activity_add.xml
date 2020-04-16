@@ -4,112 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controler.AddActivity">
+    tools:context=".controler.AddActivity"
+    android:layout_margin="25dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint=" 	#DCDCDC"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="10dp"
+        android:layout_marginTop="32dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textview_date"
+        app:layout_constraintTop_toTopOf="parent">
 
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Salle de Réunion"
+            android:inputType="textCapWords" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_place"
-
-                app:layout_constraintBottom_toTopOf="@+id/editText4" />
-
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="text"
-                android:hint="Réunion A"
-                android:textSize="10sp"
-                android:background="@color/gray"
-
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
-                 />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_hour"
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-                app:layout_constraintBottom_toTopOf="@+id/editText3" />
+    <TextView
+        android:id="@+id/textview_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="Date de la Réunion"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
+        android:inputType="date"
 
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="datetime"
-                android:hint="19.00"
-                android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/textview_hour"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_place" />
 
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_topic"
+    <ImageButton
+        android:id="@+id/button_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/transparent"
 
-                app:layout_constraintBottom_toTopOf="@+id/editText2"
-                app:layout_constraintStart_toStartOf="parent" />
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textview_date" />
 
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="32dp"
-                android:inputType="text"
-                android:hint="@string/add_topic"
-                android:textSize="10sp"
+    <TextView
+        android:id="@+id/textview_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="Heure de la Réunion"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
+        android:inputType="time"
 
-                app:layout_constraintBottom_toTopOf="@+id/textView2" />
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_topic"
+        app:layout_constraintTop_toBottomOf="@+id/textview_date" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="348dp"
-                android:text="@string/add_participants"
 
-                app:layout_constraintBottom_toTopOf="@+id/editText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/button_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_clock"
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="4dp"
-                android:inputType="textEmailAddress"
-                android:hint="jean@GHmail.com"
-                android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_hour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textview_hour" />
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:errorEnabled="true"
 
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_email"
+        app:layout_constraintTop_toBottomOf="@+id/textview_hour">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sujet"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:errorEnabled="true"
+
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_topic">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email des Participants"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_validation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Valider"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
