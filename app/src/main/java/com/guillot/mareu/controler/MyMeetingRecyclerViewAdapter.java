@@ -32,9 +32,9 @@ import java.util.Random;
 
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder>{
 
-    private final List<Meeting> mMeetings;
-    private final Random mRandom = new Random(System.currentTimeMillis());
-    private final Context context;
+    private List<Meeting> mMeetings;
+    private Random mRandom = new Random(System.currentTimeMillis());
+    private  Context context;
 
     public MyMeetingRecyclerViewAdapter(List<Meeting> meetings, Context context) {
         mMeetings = meetings;
@@ -88,6 +88,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     @Override
     public int getItemCount() {
         return mMeetings.size();
+//        mMeetings == null ? 0 :
     }
 
     private int generateRandomColor() {

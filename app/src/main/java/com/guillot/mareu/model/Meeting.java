@@ -1,10 +1,12 @@
 package com.guillot.mareu.model;
 
+import java.util.Date;
+
 public class Meeting {
 
  private double hour;
 
- private int date;
+ private Date date;
 
  private String place;
 
@@ -12,7 +14,7 @@ public class Meeting {
 
  private String participant;
 
-    public Meeting(int date, double hour, String place, String topic, String participant) {
+    public Meeting(Date date, double hour, String place, String topic, String participant) {
         this.date = date;
         this.hour = hour;
         this.place = place;
@@ -21,18 +23,18 @@ public class Meeting {
     }
 
 
-    public void meetingInfo (int date, double hour, String place, String topic) {
+    public void meetingInfo (Date date, double hour, String place, String topic) {
         this.date = date;
         this.hour = hour;
         this.place = place;
         this.topic = topic;
     }
 
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

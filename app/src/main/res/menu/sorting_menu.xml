@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <item android:id="@+id/sort_date"
+    <item android:id="@+id/filter_date"
         android:title="@string/sort_date"
         />
 
-    <item android:id="@+id/sort_place"
+    <item android:id="@+id/filter_place"
         android:title="@string/sort_location" >
 
         <menu >

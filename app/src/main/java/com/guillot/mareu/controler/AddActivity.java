@@ -6,11 +6,15 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import com.guillot.mareu.Meeting_List;
+import com.guillot.mareu.service.MeetingApiService;
+import com.guillot.mareu.service.Meeting_List;
 import com.guillot.mareu.R;
 import com.guillot.mareu.databinding.ActivityAddBinding;
 import com.guillot.mareu.fragments.DatePickerFragment;
@@ -18,12 +22,16 @@ import com.guillot.mareu.fragments.TimePickerFragment;
 import com.guillot.mareu.model.Meeting;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Locale;
 
 
-public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
     private ActivityAddBinding binding;
+    public String textSpinnerMeeting;
+    private MeetingApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         viewBinding();
         dateClickListener();
         hourClickListener();
+        setSpinner();
         validation();
     }
 
@@ -59,7 +68,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        String currentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
         binding.textviewDate.setText(currentDateString);
     }
@@ -79,25 +88,50 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         binding.textviewHour.setText(hourOfDay + "H"+ minute);
     }
 
+    public void setSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.meeting_rooms, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerMeeting.setAdapter(adapter);
+        binding.spinnerMeeting.setOnItemSelectedListener(this);
+    }
 
-    public void createMeeting() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        textSpinnerMeeting = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+
+    public void createMeeting() throws ParseException {
+        String date = binding.textviewDate.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.FRANCE);
+
         Meeting meeting = new Meeting(
-            binding.textviewDate.getText().toString(),
+                sdf.parse(date),
             Double.parseDouble(binding.textviewHour.getText().toString()),
-            binding.textInputLayoutPlace.getEditText().getText().toString(),
+            textSpinnerMeeting,
             binding.textInputLayoutTopic.getEditText().getText().toString(),
             binding.textInputLayoutEmail.getEditText().getText().toString()
         );
-        Meeting_List.mMeetingList.add(meeting);
-        finish();
+        mApiService.createMeeting(meeting);
     }
 
     public void validation () {
         binding.buttonValidation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createMeeting();
+                try {
+                    createMeeting();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                finish();
+
             }
         });
     }
+
 }

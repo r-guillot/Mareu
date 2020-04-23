@@ -1,5 +1,6 @@
 package com.guillot.mareu.controler;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,15 +10,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.guillot.mareu.R;
 import com.guillot.mareu.databinding.ActivityMainBinding;
 import com.guillot.mareu.fragments.MeetingFragment;
+import com.guillot.mareu.model.Meeting;
+import com.guillot.mareu.service.MeetingApiService;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private String filterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +37,38 @@ public class MainActivity extends AppCompatActivity {
         setListeners();
     }
 
-    //Create the menu for sorting
+    //Create the menu to filter
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sorting_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.filter_date:
+                Toast.makeText(this, "Filtre par date", Toast.LENGTH_SHORT).show();
+
+                return true;
+            case R.id.reu_a:
+                Toast.makeText(this, "Filtrer salle de réunion A", Toast.LENGTH_SHORT).show();
+                filterText=item.getTitle().toString();
+                return true;
+            case R.id.reu_b:
+                Toast.makeText(this, "Filtrer salle de réunion B", Toast.LENGTH_SHORT).show();
+                filterText=(String)item.getTitle().toString();
+                return true;
+            case R.id.reu_c:
+                Toast.makeText(this, "Filtrer salle de réunion C", Toast.LENGTH_SHORT).show();
+                filterText=(String)item.getTitle().toString();
+                return true;
+            default:return super.onOptionsItemSelected(item);
+        }
+
+    }
+
 
     public void viewBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -45,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     //add the fragment with recyclerview into the activity
     public void openFragment() {
-        MeetingFragment fragment = MeetingFragment.newInstance();
+        MeetingFragment fragment = MeetingFragment.newInstance(filterText);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.frameLayout, fragment).commit();
@@ -65,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
         Intent addIntent = new Intent (this, AddActivity.class);
         startActivity(addIntent);
     }
-
-
 
 
 }
