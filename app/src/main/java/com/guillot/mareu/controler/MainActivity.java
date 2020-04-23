@@ -33,8 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewBinding();
-        openFragment();
         setListeners();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        openFragment();
     }
 
     //Create the menu to filter
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     //add the fragment with recyclerview into the activity
     public void openFragment() {
-        MeetingFragment fragment = MeetingFragment.newInstance(filterText);
+        MeetingFragment fragment = MeetingFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.frameLayout, fragment).commit();

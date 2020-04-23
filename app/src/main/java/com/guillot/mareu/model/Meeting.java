@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Meeting {
 
- private double hour;
+ private String hour;
 
  private Date date;
 
@@ -14,7 +14,7 @@ public class Meeting {
 
  private String participant;
 
-    public Meeting(Date date, double hour, String place, String topic, String participant) {
+    public Meeting(Date date, String hour, String place, String topic, String participant) {
         this.date = date;
         this.hour = hour;
         this.place = place;
@@ -23,7 +23,7 @@ public class Meeting {
     }
 
 
-    public void meetingInfo (Date date, double hour, String place, String topic) {
+    public void meetingInfo (Date date, String hour, String place, String topic) {
         this.date = date;
         this.hour = hour;
         this.place = place;
@@ -38,11 +38,11 @@ public class Meeting {
         this.date = date;
     }
 
-    public double getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(double hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

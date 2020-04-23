@@ -28,9 +28,9 @@ public class MeetingFragment extends Fragment {
     private List<Meeting> mMeetings;
     private MeetingApiService mApiService;
 
-    public static MeetingFragment newInstance (String string) {
+    public static MeetingFragment newInstance () {
         MeetingFragment fragment = new MeetingFragment();
-        fragment.filterRoom(string);
+//        fragment.filterRoom(string);
         return fragment;
     }
 

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.guillot.mareu.DI;
 import com.guillot.mareu.service.MeetingApiService;
 import com.guillot.mareu.service.Meeting_List;
 import com.guillot.mareu.R;
@@ -37,6 +38,8 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        mApiService = DI.getMeetingApiService();
 
         viewBinding();
         dateClickListener();
@@ -107,11 +110,11 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
 
     public void createMeeting() throws ParseException {
         String date = binding.textviewDate.getText().toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
 
         Meeting meeting = new Meeting(
                 sdf.parse(date),
-            Double.parseDouble(binding.textviewHour.getText().toString()),
+            binding.textviewHour.getText().toString(),
             textSpinnerMeeting,
             binding.textInputLayoutTopic.getEditText().getText().toString(),
             binding.textInputLayoutEmail.getEditText().getText().toString()
