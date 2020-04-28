@@ -11,7 +11,9 @@
     <string name="reu_a">Réunion A</string>
     <string name="reu_b">Réunion B</string>
     <string name="reu_c">Réunion C</string>
-
+    <string name="h">H</string>
+    <string name="date_filter">Filtrer par date</string>
+    <string name="place_filter">Filtrer salle de </string>
 
     <string-array name="meeting_rooms">
         <item>Réunion A</item>

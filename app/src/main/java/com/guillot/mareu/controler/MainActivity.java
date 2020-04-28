@@ -55,19 +55,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter_date:
-                Toast.makeText(this, "Filtre par date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.date_filter, Toast.LENGTH_SHORT).show();
 
                 return true;
             case R.id.reu_a:
-                Toast.makeText(this, "Filtrer salle de réunion A", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.place_filter+ R.string.reu_a, Toast.LENGTH_SHORT).show();
                 filterText=item.getTitle().toString();
                 return true;
             case R.id.reu_b:
-                Toast.makeText(this, "Filtrer salle de réunion B", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.place_filter+ R.string.reu_b, Toast.LENGTH_SHORT).show();
                 filterText=(String)item.getTitle().toString();
                 return true;
             case R.id.reu_c:
-                Toast.makeText(this, "Filtrer salle de réunion C", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.place_filter+ R.string.reu_c, Toast.LENGTH_SHORT).show();
                 filterText=(String)item.getTitle().toString();
                 return true;
             default:return super.onOptionsItemSelected(item);

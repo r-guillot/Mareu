@@ -1,19 +1,30 @@
 package com.guillot.mareu.controler;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.TextWatcher;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.guillot.mareu.DI;
+import com.guillot.mareu.fragments.ChipFragment;
 import com.guillot.mareu.service.MeetingApiService;
 import com.guillot.mareu.service.Meeting_List;
 import com.guillot.mareu.R;
@@ -45,7 +56,9 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         dateClickListener();
         hourClickListener();
         setSpinner();
+        openFragment();
         validation();
+
     }
 
     public void viewBinding() {
@@ -88,7 +101,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        binding.textviewHour.setText(hourOfDay + "H"+ minute);
+        binding.textviewHour.setText(hourOfDay + R.string.h+ minute);
     }
 
     public void setSpinner() {
@@ -105,6 +118,13 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    public void openFragment() {
+        ChipFragment fragment = ChipFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.frameLayout, fragment).commit();
     }
 
 
@@ -131,10 +151,11 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                finish();
 
+                finish();
             }
         });
     }
+
 
 }

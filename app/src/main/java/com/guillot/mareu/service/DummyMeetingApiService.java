@@ -1,8 +1,14 @@
 package com.guillot.mareu.service;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.guillot.mareu.controler.MainActivity;
+import com.guillot.mareu.controler.MyMeetingRecyclerViewAdapter;
 import com.guillot.mareu.model.Meeting;
 
 import java.util.ArrayList;

@@ -32,9 +32,10 @@ import java.util.Random;
 
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder>{
 
+
     private List<Meeting> mMeetings;
     private Random mRandom = new Random(System.currentTimeMillis());
-    private  Context context;
+    private Context context;
 
     public MyMeetingRecyclerViewAdapter(List<Meeting> meetings, Context context) {
         mMeetings = meetings;
@@ -106,17 +107,18 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         return Color.rgb(red, green, blue);
     }
 
+
     public void deleteDialog(final int position) {
         AlertDialog alertDialog = new AlertDialog.Builder(this.context).create();
         alertDialog.setTitle("Alert");
         alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer cette réunion ?");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Oui",
                 new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                deleteItem(position);
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteItem(position);
+                    }
+                });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Non",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -130,4 +132,6 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         mMeetings.remove(position);
         notifyItemRemoved(position);
     }
+
+
 }

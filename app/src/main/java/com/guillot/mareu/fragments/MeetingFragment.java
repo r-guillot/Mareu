@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guillot.mareu.DI;
+import com.guillot.mareu.databinding.FragmentRecyclerviewMeetingBinding;
 import com.guillot.mareu.service.MeetingApiService;
 import com.guillot.mareu.service.Meeting_List;
 import com.guillot.mareu.R;
@@ -23,9 +24,8 @@ import java.util.List;
 
 public class MeetingFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
+    FragmentRecyclerviewMeetingBinding binding;
     private MyMeetingRecyclerViewAdapter mAdapter;
-    private List<Meeting> mMeetings;
     private MeetingApiService mApiService;
 
     public static MeetingFragment newInstance () {
@@ -50,24 +50,25 @@ public class MeetingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recyclerview_meeting, container, false);
+        binding = FragmentRecyclerviewMeetingBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         Context context = view.getContext();
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_meeting);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getMeetings(),context);
-//        mRecyclerView.setAdapter(mAdapter);
+        binding.recyclerviewMeeting.setLayoutManager(new LinearLayoutManager(context));
+        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getMeetings(),context);
+        binding.recyclerviewMeeting.setAdapter(mAdapter);
         return view;
     }
 
     public void initList() {
-        mMeetings = mApiService.getMeetings();
 
-        mRecyclerView.setAdapter(new MyMeetingRecyclerViewAdapter(mMeetings, getContext()));
+        mAdapter.notifyDataSetChanged();
     }
 
-    public void filterRoom (String string) {
-        mApiService.filterMeetingRoom(string);
-    }
+
+
+//    public void filterRoom (String string) {
+//        mApiService.filterMeetingRoom(string);
+//    }
 
 }

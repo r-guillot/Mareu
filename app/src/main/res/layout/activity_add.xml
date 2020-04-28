@@ -108,6 +108,14 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_validation"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email" />
 
     <Button
         android:id="@+id/button_validation"
@@ -117,8 +125,6 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
