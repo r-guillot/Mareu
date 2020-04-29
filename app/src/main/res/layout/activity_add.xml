@@ -1,130 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controler.AddActivity"
-    android:layout_margin="25dp">
+    android:fillViewport="true"
+    tools:context=".controler.AddActivity">
 
-    <Spinner
-        android:id="@+id/spinner_meeting"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/textview_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="?attr/editTextBackground"
-        android:gravity="center_vertical"
-        android:hint="Date de la Réunion"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:textColor="?attr/editTextColor"
-        android:inputType="date"
-
-        app:layout_constraintBottom_toTopOf="@+id/textview_hour"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_meeting" />
-
-
-    <ImageButton
-        android:id="@+id/button_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/transparent"
-
-        android:src="@drawable/ic_calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_date" />
-
-    <TextView
-        android:id="@+id/textview_hour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="?attr/editTextBackground"
-        android:gravity="center_vertical"
-        android:hint="Heure de la Réunion"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:textColor="?attr/editTextColor"
-        android:inputType="time"
-
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_topic"
-        app:layout_constraintTop_toBottomOf="@+id/textview_date" />
-
-
-    <ImageButton
-        android:id="@+id/button_hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/transparent"
-        android:src="@drawable/ic_clock"
-
-        app:layout_constraintBottom_toBottomOf="@+id/textview_hour"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_hour" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_topic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:errorEnabled="true"
-
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_email"
-        app:layout_constraintTop_toBottomOf="@+id/textview_hour">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <Spinner
+            android:id="@+id/spinner_meeting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sujet"
-            android:inputType="textCapWords" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:hint="Date de la Réunion"
+            android:inputType="date"
+            app:errorEnabled="true"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            app:layout_constraintBottom_toTopOf="@+id/textview_hour"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_meeting" />
+
+        <ImageButton
+            android:id="@+id/button_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_date" />
+
+        <TextView
+            android:id="@+id/textview_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:hint="Heure de la Réunion"
+            app:errorEnabled="true"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout_topic"
+            app:layout_constraintTop_toBottomOf="@+id/textview_date" />
+
+
+        <ImageButton
+            android:id="@+id/button_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_hour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_hour" />
+
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:errorEnabled="true"
+            android:id="@+id/textInputLayout_topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:errorEnabled="true"
 
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_topic">
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
+            app:layout_constraintTop_toBottomOf="@+id/textview_hour">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email des Participants"
-                    android:inputType="textEmailAddress" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Sujet"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:inputType="textCapWords" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_topic">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button_validation"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Email des Participants"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/button_validation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Valider"
+        </com.google.android.material.textfield.TextInputLayout>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email" />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:closeIconEnabled="true"
 
+            app:layout_constraintBottom_toTopOf="@id/button_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button_validation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Valider"
+
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

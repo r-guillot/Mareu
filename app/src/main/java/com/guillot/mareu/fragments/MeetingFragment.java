@@ -20,6 +20,8 @@ import com.guillot.mareu.R;
 import com.guillot.mareu.controler.MyMeetingRecyclerViewAdapter;
 import com.guillot.mareu.model.Meeting;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 public class MeetingFragment extends Fragment {
@@ -47,6 +49,18 @@ public class MeetingFragment extends Fragment {
         initList();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +75,6 @@ public class MeetingFragment extends Fragment {
     }
 
     public void initList() {
-
         mAdapter.notifyDataSetChanged();
     }
 

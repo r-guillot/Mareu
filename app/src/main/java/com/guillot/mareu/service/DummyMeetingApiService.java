@@ -36,5 +36,10 @@ public class DummyMeetingApiService implements MeetingApiService {
         return filterList;
     }
 
+    public void deleteMeeting (Meeting meeting) {
+        mMeetings.remove(meeting);
+    }
+
+
 }
 

@@ -10,5 +10,7 @@ public interface MeetingApiService {
 
     void createMeeting (Meeting meeting);
 
+    void deleteMeeting (Meeting meeting);
+
     List<Meeting> filterMeetingRoom (String text);
 }

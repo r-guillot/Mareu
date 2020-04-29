@@ -21,14 +21,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.guillot.mareu.R;
 
-import com.guillot.mareu.databinding.MeetingItemBinding;
-import com.guillot.mareu.fragments.MeetingFragment;
+
 import com.guillot.mareu.model.Meeting;
 
+import org.greenrobot.eventbus.EventBus;
 
-import java.text.DecimalFormat;
+
 import java.util.List;
 import java.util.Random;
+
 
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder>{
 
@@ -75,7 +76,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
 
         final String meetingInfo = currentMeeting.getPlace() + " - " + (currentMeeting.getHour()) + " - " + currentMeeting.getTopic();
         holder.mTextViewInfo.setText(meetingInfo);
-        holder.mTextViewParticipant.setText((currentMeeting.getParticipant()).replace( " ", ", "));
+        holder.mTextViewParticipant.setText((currentMeeting.getParticipant()).trim().replace( " ", ", "));
         holder.mImageView.setColorFilter(generateRandomColor());
 
         holder.mTrashButton.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +107,8 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
 
         return Color.rgb(red, green, blue);
     }
+
+
 
 
     public void deleteDialog(final int position) {
