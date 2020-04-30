@@ -51,7 +51,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         dateClickListener();
         hourClickListener();
         setSpinner();
-        openFragment();
+        createChip();
         validation();
 
     }
@@ -118,7 +118,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public void openFragment() {
+    public void createChip() {
         binding.emailEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -129,7 +129,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
                             addChipToGroup(email, binding.chipGroup);
                             binding.emailEditText.setText("");
                         } else if (email.contains(" ")) {
-                            binding.emailEditText.setError("Veuillez insérer une seule adresse mail à la fois");
+                            binding.emailEditText.setError("Veuillez insérer une seule adresse mail à la fois ou supprimer les espaces");
                         }
                         else {
                             binding.emailEditText.setError("Veillez respecter le format d'une adresse mail");
@@ -241,26 +241,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
                     finish();
                 }
             });
-
-
     }
 }
 
-
-
-
-
-
-//binding.buttonValidation.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            try {
-//                createMeeting();
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//
-//            finish();
-//        }
-//    });
 

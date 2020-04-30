@@ -20,6 +20,27 @@
             <item android:id="@+id/reu_c"
                 android:title="@string/reu_c" />
 
+            <item android:id="@+id/reu_d"
+                android:title="@string/reu_d" />
+
+            <item android:id="@+id/reu_e"
+                android:title="@string/reu_e" />
+
+            <item android:id="@+id/reu_f"
+                android:title="@string/reu_f" />
+
+            <item android:id="@+id/reu_g"
+                android:title="@string/reu_g" />
+
+            <item android:id="@+id/reu_h"
+                android:title="@string/reu_h" />
+
+            <item android:id="@+id/reu_i"
+                android:title="@string/reu_i" />
+
+            <item android:id="@+id/reu_j"
+                android:title="@string/reu_j" />
+
         </menu>
 
         </item>

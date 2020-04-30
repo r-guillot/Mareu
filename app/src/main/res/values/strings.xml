@@ -4,13 +4,23 @@
     <string name="sort_location">Filtrer par Salle</string>
     <string name="name_activity">Ma réu</string>
     <string name="add_place">Salle de Réunion</string>
-    <string name="add_hour">Heure</string>
+    <string name="add_date">Date de la Réunion</string>
+    <string name="add_hour">Heure de la Réunion</string>
     <string name="add_topic">Sujet</string>
-    <string name="add_participants">Participant</string>
+    <string name="add_participants">Email des Participants</string>
+    <string name="validate">Valider</string>
 
     <string name="reu_a">Réunion A</string>
     <string name="reu_b">Réunion B</string>
     <string name="reu_c">Réunion C</string>
+    <string name="reu_d">Réunion D</string>
+    <string name="reu_e">Réunion E</string>
+    <string name="reu_f">Réunion F</string>
+    <string name="reu_g">Réunion G</string>
+    <string name="reu_h">Réunion H</string>
+    <string name="reu_i">Réunion I</string>
+    <string name="reu_j">Réunion J</string>
+
     <string name="h">H</string>
     <string name="date_filter">Filtrer par date</string>
     <string name="place_filter">Filtrer salle de </string>
@@ -19,5 +29,12 @@
         <item>Réunion A</item>
         <item>Réunion B</item>
         <item>Réunion C</item>
+        <item>Réunion D</item>
+        <item>Réunion E</item>
+        <item>Réunion F</item>
+        <item>Réunion G</item>
+        <item>Réunion H</item>
+        <item>Réunion I</item>
+        <item>Réunion J</item>
     </string-array>
 </resources>

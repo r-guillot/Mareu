@@ -27,8 +27,7 @@
             android:layout_marginTop="40dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
-            android:hint="Date de la Réunion"
-            android:inputType="date"
+            android:hint="@string/add_date"
             app:errorEnabled="true"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
@@ -53,7 +52,7 @@
             android:layout_marginTop="40dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
-            android:hint="Heure de la Réunion"
+            android:hint="@string/add_hour"
             app:errorEnabled="true"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
@@ -87,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Sujet"
+                android:hint="@string/add_topic"
                 android:maxLength="15"
                 android:maxLines="1"
                 android:inputType="textCapWords" />
@@ -108,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Email des Participants"
+                android:hint="@string/add_participants"
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress" />
 
@@ -131,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Valider"
+            android:text="@string/validate"
 
             app:layout_constraintBottom_toBottomOf="parent" />
 

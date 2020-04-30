@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,10 +16,6 @@ import android.widget.Toast;
 import com.guillot.mareu.R;
 import com.guillot.mareu.databinding.ActivityMainBinding;
 import com.guillot.mareu.fragments.MeetingFragment;
-import com.guillot.mareu.model.Meeting;
-import com.guillot.mareu.service.MeetingApiService;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sorting_menu, menu);
+        inflater.inflate(R.menu.filtering_menu, menu);
         return true;
     }
 
@@ -59,18 +54,47 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.reu_a:
-                Toast.makeText(this, R.string.place_filter+ R.string.reu_a, Toast.LENGTH_SHORT).show();
-                filterText=item.getTitle().toString();
+                Toast.makeText(this, R.string.place_filter + R.string.reu_a, Toast.LENGTH_SHORT).show();
+                filterText = item.getTitle().toString();
                 return true;
             case R.id.reu_b:
-                Toast.makeText(this, R.string.place_filter+ R.string.reu_b, Toast.LENGTH_SHORT).show();
-                filterText=(String)item.getTitle().toString();
+                Toast.makeText(this, R.string.place_filter + R.string.reu_b, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
                 return true;
             case R.id.reu_c:
-                Toast.makeText(this, R.string.place_filter+ R.string.reu_c, Toast.LENGTH_SHORT).show();
-                filterText=(String)item.getTitle().toString();
+                Toast.makeText(this, R.string.place_filter + R.string.reu_c, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
                 return true;
-            default:return super.onOptionsItemSelected(item);
+            case R.id.reu_d:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_d, Toast.LENGTH_SHORT).show();
+                filterText = item.getTitle().toString();
+                return true;
+            case R.id.reu_e:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_e, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
+                return true;
+            case R.id.reu_f:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_f, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
+                return true;
+            case R.id.reu_g:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_g, Toast.LENGTH_SHORT).show();
+                filterText = item.getTitle().toString();
+                return true;
+            case R.id.reu_h:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_h, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
+                return true;
+            case R.id.reu_i:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_i, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
+                return true;
+            case R.id.reu_j:
+                Toast.makeText(this, R.string.place_filter + R.string.reu_j, Toast.LENGTH_SHORT).show();
+                filterText = (String) item.getTitle().toString();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
     }
@@ -101,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAddActivity() {
-        Intent addIntent = new Intent (this, AddActivity.class);
+        Intent addIntent = new Intent(this, AddActivity.class);
         startActivity(addIntent);
     }
 
