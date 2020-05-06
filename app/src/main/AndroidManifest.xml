@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".controler.AddActivity"></activity>
         <activity
-            android:name=".controler.MainActivity"
+            android:name=".controler.ListActivity"
             android:label="@string/name_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

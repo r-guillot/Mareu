@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:id="@+id/meeting_item"
     >
 
     <ImageView
@@ -16,8 +16,8 @@
 
     <TextView
         android:id="@+id/text_meeting_info"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/image_meeting"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
@@ -25,8 +25,8 @@
 
     <TextView
         android:id="@+id/text_meeting_participant"
-        android:layout_width="300dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/text_meeting_info"
         android:layout_toEndOf="@+id/image_meeting"
         android:maxLines="1"
@@ -39,8 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/delete_button"
-        android:layout_toEndOf="@+id/text_meeting_info"
-        android:layout_marginTop="22dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         android:backgroundTint="@color/white"
         />
 

@@ -1,27 +1,20 @@
 package com.guillot.mareu.controler;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guillot.mareu.R;
 
-
+import com.guillot.mareu.databinding.MeetingItemBinding;
+import com.guillot.mareu.event.DeleteEvent;
 import com.guillot.mareu.model.Meeting;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,7 +26,6 @@ import java.util.Random;
 
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder>{
 
-
     private List<Meeting> mMeetings;
     private Random mRandom = new Random(System.currentTimeMillis());
     private Context context;
@@ -43,31 +35,21 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         this.context = context;
     }
 
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTextViewInfo;
-        public TextView mTextViewParticipant;
-        public ImageView mImageView;
-        public ImageButton mTrashButton;
+        MeetingItemBinding binding;
 
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mTextViewInfo = itemView.findViewById(R.id.text_meeting_info);
-            mTextViewParticipant = itemView.findViewById(R.id.text_meeting_participant);
-            mImageView = itemView.findViewById(R.id.image_meeting);
-            mTrashButton = itemView.findViewById(R.id.trash_button);
+        public MyViewHolder(@NonNull MeetingItemBinding b) {
+            super(b.getRoot());
+            binding = b;
         }
-
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meeting_item, parent, false);
-        MyViewHolder mViewHolder = new MyViewHolder(view);
-        return mViewHolder;
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        return new MyViewHolder(MeetingItemBinding.inflate(layoutInflater));
     }
 
     @Override
@@ -75,14 +57,14 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         final Meeting currentMeeting = mMeetings.get(position);
 
         final String meetingInfo = currentMeeting.getPlace() + " - " + (currentMeeting.getHour()) + " - " + currentMeeting.getTopic();
-        holder.mTextViewInfo.setText(meetingInfo);
-        holder.mTextViewParticipant.setText((currentMeeting.getParticipant()).trim().replace( " ", ", "));
-        holder.mImageView.setColorFilter(generateRandomColor());
+        holder.binding.textMeetingInfo.setText(meetingInfo);
+        holder.binding.textMeetingParticipant.setText((currentMeeting.getParticipant()).trim().replace( " ", ", "));
+        holder.binding.imageMeeting.setColorFilter(generateRandomColor());
 
-        holder.mTrashButton.setOnClickListener(new View.OnClickListener() {
+        holder.binding.trashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteDialog(position);
+                deleteDialog(currentMeeting);
             }
         });
     }
@@ -90,9 +72,9 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     @Override
     public int getItemCount() {
         return mMeetings.size();
-//        mMeetings == null ? 0 :
     }
 
+    //generate random color for the meetings circle image
     private int generateRandomColor() {
         // This is the base color which will be mixed with the generated one
         final int baseColor = Color.WHITE;
@@ -108,18 +90,16 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         return Color.rgb(red, green, blue);
     }
 
-
-
-
-    public void deleteDialog(final int position) {
+    //Alert dialog for the delete feature
+    public void deleteDialog(final Meeting currentMeeting) {
         AlertDialog alertDialog = new AlertDialog.Builder(this.context).create();
-        alertDialog.setTitle("Alert");
+        alertDialog.setTitle(R.string.alert);
         alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer cette réunion ?");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Oui",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        deleteItem(position);
+                        EventBus.getDefault().post(new DeleteEvent(currentMeeting));
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Non",
@@ -130,11 +110,5 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
                 });
         alertDialog.show();
     }
-
-    public void deleteItem(int position) {
-        mMeetings.remove(position);
-        notifyItemRemoved(position);
-    }
-
 
 }

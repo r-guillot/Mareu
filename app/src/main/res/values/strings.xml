@@ -9,6 +9,8 @@
     <string name="add_topic">Sujet</string>
     <string name="add_participants">Email des Participants</string>
     <string name="validate">Valider</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 
     <string name="reu_a">Réunion A</string>
     <string name="reu_b">Réunion B</string>
@@ -21,9 +23,21 @@
     <string name="reu_i">Réunion I</string>
     <string name="reu_j">Réunion J</string>
 
-    <string name="h">H</string>
+    <string name="h">%1$sH%2$s</string>
+
+    <string name="error_space">Veuillez insérer une seule adresse mail à la fois ou supprimer les espaces</string>
+    <string name="error_empty">Des participants doivent être ajoutés</string>
+    <string name="error_format">Veillez respecter le format d\'une adresse mail</string>
+    <string name="error_date">Veuillez renseigner une date</string>
+    <string name="error_hour">Veuillez renseigner une heure</string>
+    <string name="error_topic">Veuillez renseigner un Sujet</string>
+    <string name="error_participants">Veuillez renseigner des participants</string>
+    <string name="alert">Alerte</string>
+    <string name="delete_reu">Êtes-vous sûr de vouloir supprimer cette réunion ?</string>
+
+
     <string name="date_filter">Filtrer par date</string>
-    <string name="place_filter">Filtrer salle de </string>
+    <string name="place_filter">Filtrer salle de %1$s </string>
 
     <string-array name="meeting_rooms">
         <item>Réunion A</item>
