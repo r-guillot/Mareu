@@ -34,10 +34,12 @@
     <string name="error_participants">Veuillez renseigner des participants</string>
     <string name="alert">Alerte</string>
     <string name="delete_reu">Êtes-vous sûr de vouloir supprimer cette réunion ?</string>
+    <string name="no_meeting">Aucune reunion à cette date ou Salle</string>
 
 
     <string name="date_filter">Filtrer par date</string>
     <string name="place_filter">Filtrer salle de %1$s </string>
+    <string name="filter_reset">Réinitialiser les filtres</string>
 
     <string-array name="meeting_rooms">
         <item>Réunion A</item>

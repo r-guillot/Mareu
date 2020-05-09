@@ -22,7 +22,7 @@ public class DatePickerFragment extends DialogFragment {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog datePickerDial = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
+        DatePickerDialog datePickerDial = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day);
         DatePicker datePicker = datePickerDial.getDatePicker();
         datePicker.setMinDate(calendar.getTimeInMillis());
         return datePickerDial;

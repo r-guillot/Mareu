@@ -1,6 +1,5 @@
 package com.guillot.mareu.controler;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.guillot.mareu.R;
 
 import com.guillot.mareu.databinding.MeetingItemBinding;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder>{
+public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MyViewHolder> {
 
     private List<Meeting> mMeetings;
     private Random mRandom = new Random(System.currentTimeMillis());
@@ -35,11 +35,11 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         this.context = context;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         MeetingItemBinding binding;
 
-        public MyViewHolder(@NonNull MeetingItemBinding b) {
+        private MyViewHolder(@NonNull MeetingItemBinding b) {
             super(b.getRoot());
             binding = b;
         }
@@ -58,7 +58,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
 
         final String meetingInfo = currentMeeting.getPlace() + " - " + (currentMeeting.getHour()) + " - " + currentMeeting.getTopic();
         holder.binding.textMeetingInfo.setText(meetingInfo);
-        holder.binding.textMeetingParticipant.setText((currentMeeting.getParticipant()).trim().replace( " ", ", "));
+        holder.binding.textMeetingParticipant.setText((currentMeeting.getParticipant()).trim().replace(" ", ", "));
         holder.binding.imageMeeting.setColorFilter(generateRandomColor());
 
         holder.binding.trashButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +74,11 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         return mMeetings.size();
     }
 
-    //generate random color for the meetings circle image
+    /**
+     * generate random color for the meetings circle image
+     *
+     * @return
+     */
     private int generateRandomColor() {
         // This is the base color which will be mixed with the generated one
         final int baseColor = Color.WHITE;
@@ -90,22 +94,25 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
         return Color.rgb(red, green, blue);
     }
 
-    //Alert dialog for the delete feature
-    public void deleteDialog(final Meeting currentMeeting) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this.context).create();
-        alertDialog.setTitle(R.string.alert);
-        alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer cette réunion ?");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Oui",
-                new DialogInterface.OnClickListener() {
+    /**
+     * Alert dialog for the delete feature
+     *
+     * @param currentMeeting
+     */
+    private void deleteDialog(final Meeting currentMeeting) {
+        MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.alert)
+                .setMessage(context.getString(R.string.delete_reu))
+                .setNegativeButton(context.getText(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        EventBus.getDefault().post(new DeleteEvent(currentMeeting));
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Non",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                })
+                .setPositiveButton(context.getText(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EventBus.getDefault().post(new DeleteEvent(currentMeeting));
                     }
                 });
         alertDialog.show();

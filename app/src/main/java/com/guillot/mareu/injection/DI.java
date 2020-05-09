@@ -11,8 +11,8 @@ public class DI {
     private static MeetingApiService service = new DummyMeetingApiService();
 
     public static MeetingApiService getMeetingApiService() {
-            return service;
-        }
+        return service;
+    }
 
     public static MeetingApiService getNewMeetingApiService() {
         return new DummyMeetingApiService();

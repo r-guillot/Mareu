@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controler.AddActivity"></activity>
+        <activity android:name=".controler.AddMeetingActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            </activity>
         <activity
-            android:name=".controler.ListActivity"
+            android:name=".controler.ListMeetingActivity"
             android:label="@string/name_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

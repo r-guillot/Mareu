@@ -17,7 +17,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.guillot.mareu.R;
-import com.guillot.mareu.databinding.ActivityMainBinding;
+import com.guillot.mareu.databinding.ActivityListMeetingBinding;
 import com.guillot.mareu.event.FilterDateEvent;
 import com.guillot.mareu.event.FilterPlaceEvent;
 import com.guillot.mareu.fragments.DatePickerFragment;
@@ -28,15 +28,15 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class ListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private ActivityMainBinding binding;
+    private ActivityListMeetingBinding binding;
     private String filterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_meeting);
 
         viewBinding();
         setListeners();
@@ -49,12 +49,17 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void viewBinding() {
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityListMeetingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
     }
 
-    //Create the menu to filter
+    /**
+     * Create the menu to filter
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -62,7 +67,12 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
         return true;
     }
 
-    //set menu option with filter
+    /**
+     * set menu option with filter
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -121,18 +131,32 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
                 filterText = item.getTitle().toString();
                 EventBus.getDefault().post(new FilterPlaceEvent(filterText));
                 return true;
+
+            case R.id.filter_reset:
+                Toast.makeText(this, getString(R.string.filter_reset), Toast.LENGTH_SHORT).show();
+                filterText = item.getTitle().toString();
+                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //date picker for date Filter
+    /**
+     * date picker for date Filter
+     */
     public void dateClickListener() {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+        DialogFragment datePicker = new DatePickerFragment();
+        datePicker.show(getSupportFragmentManager(), "date picker");
     }
 
-    //Event bus to pass date
+    /**
+     * Event bus to pass date
+     *
+     * @param view
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
@@ -148,7 +172,9 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
 
-    //add the fragment with recyclerview into the activity
+    /**
+     * add the fragment with recyclerview into the activity
+     */
     public void openFragment() {
         MeetingFragment fragment = MeetingFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -156,7 +182,9 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
         transaction.add(R.id.frameLayout, fragment).commit();
     }
 
-    //Set listener for the add floating action button
+    /**
+     * Set listener for the add floating action button
+     */
     public void setListeners() {
         binding.fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +195,7 @@ public class ListActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void openAddActivity() {
-        Intent addIntent = new Intent(this, AddActivity.class);
+        Intent addIntent = new Intent(this, AddMeetingActivity.class);
         startActivity(addIntent);
     }
 

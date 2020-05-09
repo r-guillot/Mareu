@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".controler.AddActivity">
+    tools:context=".controler.AddMeetingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/add_constraintlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_constraintlayout"
         android:padding="16dp">
 
         <Spinner
@@ -30,9 +30,9 @@
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:hint="@string/add_date"
-            app:errorEnabled="true"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/textview_hour"
             app:layout_constraintTop_toBottomOf="@+id/spinner_meeting" />
 
@@ -55,9 +55,9 @@
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:hint="@string/add_hour"
-            app:errorEnabled="true"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout_topic"
             app:layout_constraintTop_toBottomOf="@+id/textview_date" />
 
@@ -81,8 +81,8 @@
             android:layout_marginTop="24dp"
             app:errorEnabled="true"
 
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
-            app:layout_constraintTop_toBottomOf="@+id/textview_hour">
+            app:layout_constraintTop_toBottomOf="@+id/textview_hour"
+            tools:layout_editor_absoluteX="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEditLayout_topic"
@@ -90,20 +90,31 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/add_topic"
+                android:inputType="textCapWords"
                 android:maxLength="15"
-                android:maxLines="1"
-                android:inputType="textCapWords" />
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:closeIconEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_topic" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="220dp"
             app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_topic">
+            app:layout_constraintBottom_toTopOf="@+id/button_validation"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
@@ -115,18 +126,6 @@
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:closeIconEnabled="true"
-
-            app:layout_constraintBottom_toTopOf="@id/button_validation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail" />
 
         <Button
             android:id="@+id/button_validation"

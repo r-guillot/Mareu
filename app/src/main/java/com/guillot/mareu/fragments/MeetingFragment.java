@@ -11,33 +11,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.guillot.mareu.R;
 import com.guillot.mareu.event.DeleteEvent;
 import com.guillot.mareu.event.FilterDateEvent;
 import com.guillot.mareu.event.FilterPlaceEvent;
 import com.guillot.mareu.injection.DI;
 import com.guillot.mareu.databinding.FragmentRecyclerviewMeetingBinding;
-import com.guillot.mareu.model.Meeting;
+
 import com.guillot.mareu.service.MeetingApiService;
 import com.guillot.mareu.controler.MyMeetingRecyclerViewAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 public class MeetingFragment extends Fragment {
 
-    FragmentRecyclerviewMeetingBinding binding;
+    private FragmentRecyclerviewMeetingBinding binding;
     private MyMeetingRecyclerViewAdapter mAdapter;
     private MeetingApiService mApiService;
-    private List<Meeting> mMeetings;
 
-    public static MeetingFragment newInstance () {
-        MeetingFragment fragment = new MeetingFragment();
-        return fragment;
+    public static MeetingFragment newInstance() {
+        return new MeetingFragment();
     }
 
     @Override
@@ -77,49 +71,48 @@ public class MeetingFragment extends Fragment {
         return view;
     }
 
-    public void initList() {
-        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getMeetings(),getContext());
+    private void initList() {
+        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getMeetings(), getContext());
         binding.recyclerviewMeeting.setAdapter(mAdapter);
-
-        mAdapter.notifyDataSetChanged();
     }
 
-    // receiving event bus for place filter
+    /**
+     * receiving event bus for place filter
+     *
+     * @param event
+     */
     @Subscribe
     public void onEvent(FilterPlaceEvent event) {
-        mAdapter = new MyMeetingRecyclerViewAdapter(getPlaceFiltered(event.filterText),getContext());
+        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getPlaceFiltered(event.filterText), getContext());
+        if (mApiService.getPlaceFiltered(event.filterText).isEmpty()) {
+            binding.recyclerviewMeeting.setVisibility(View.GONE);
+            binding.emptyView.setVisibility(View.VISIBLE);
+        } else {
+            binding.recyclerviewMeeting.setVisibility(View.VISIBLE);
+            binding.emptyView.setVisibility(View.GONE);
+        }
         binding.recyclerviewMeeting.setAdapter(mAdapter);
     }
 
-    private List<Meeting> getPlaceFiltered(String filterText) {
-        List<Meeting> filteredPlaceList = new ArrayList<>();
-        for (Meeting meeting : mApiService.getMeetings()) {
-            if (meeting.getPlace().contains(filterText)) {
-                filteredPlaceList.add(meeting);
-            }
-        }
-        return filteredPlaceList;
-    }
 
-    // receiving event bus for date filter
+    /**
+     * receiving event bus for date filter
+     *
+     * @param event
+     */
     @Subscribe
     public void onEvent(FilterDateEvent event) {
-        mAdapter = new MyMeetingRecyclerViewAdapter(getDateFiltered(event.filterDate),getContext());
+        mAdapter = new MyMeetingRecyclerViewAdapter(mApiService.getDateFiltered(event.filterDate), getContext());
+        if (mApiService.getDateFiltered(event.filterDate).isEmpty()) {
+            binding.recyclerviewMeeting.setVisibility(View.GONE);
+            binding.emptyView.setVisibility(View.VISIBLE);
+        } else {
+            binding.recyclerviewMeeting.setVisibility(View.VISIBLE);
+            binding.emptyView.setVisibility(View.GONE);
+        }
         binding.recyclerviewMeeting.setAdapter(mAdapter);
     }
 
-    private List<Meeting> getDateFiltered(String filterDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-        List<Meeting> filteredDateList = new ArrayList<>();
-        for (Meeting meeting : mApiService.getMeetings()) {
-            if (meeting.getDate().contains(filterDate)) {
-                filteredDateList.add(meeting);
-            }
-        }
-        return filteredDateList;
-    }
-
-    // receiving event bus for delete meeting
     @Subscribe
     public void onDeleteEvent(DeleteEvent event) {
         mApiService.deleteMeeting(event.meeting);

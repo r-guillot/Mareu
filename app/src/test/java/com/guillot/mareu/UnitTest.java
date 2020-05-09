@@ -29,9 +29,9 @@ public class UnitTest {
 
     @Test
     public void getMeetingWithSuccess() {
-      List<Meeting> meetings = service.getMeetings();
-      List<Meeting> expectedMeeting = MeetingListService.MEETING_LIST;
-      assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeeting.toArray()));
+        List<Meeting> meetings = service.getMeetings();
+        List<Meeting> expectedMeeting = MeetingListService.MEETING_LIST;
+        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeeting.toArray()));
     }
 
     @Test
@@ -49,5 +49,14 @@ public class UnitTest {
         Meeting meetingToDelete = service.getMeetings().get(0);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeetings().contains(meetingToDelete));
+    }
+
+    @Test
+    public void filterMeetingByPlace() {
+        List<Meeting> meetingsAll = service.getMeetings();
+        String filterText = "Réunion A";
+        List<Meeting> meetingsFiltered;
+        meetingsFiltered = service.getPlaceFiltered(filterText);
+        assertFalse(meetingsFiltered.containsAll(meetingsAll));
     }
 }

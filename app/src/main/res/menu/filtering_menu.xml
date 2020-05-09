@@ -45,4 +45,8 @@
 
         </item>
 
+    <item android:id="@+id/filter_reset"
+        android:title="@string/filter_reset"
+        />
+
 </menu>

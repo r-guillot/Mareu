@@ -2,15 +2,15 @@ package com.guillot.mareu.model;
 
 public class Meeting {
 
- private String hour;
+    private String hour;
 
- private String date;
+    private String date;
 
- private String place;
+    private String place;
 
- private String topic;
+    private String topic;
 
- private String participant;
+    private String participant;
 
     public Meeting(String date, String hour, String place, String topic, String participant) {
         this.date = date;

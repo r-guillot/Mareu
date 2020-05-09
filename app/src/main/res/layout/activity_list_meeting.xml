@@ -5,8 +5,7 @@
     android:id="@+id/activity_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".controler.ListActivity">
+    tools:context=".controler.ListMeetingActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -23,7 +22,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/plus_fab"
-        app:tint="@android:color/white"
-        app:backgroundTint="@color/red" />
+        app:backgroundTint="@color/red"
+        app:tint="@android:color/white" />
 
 </RelativeLayout>

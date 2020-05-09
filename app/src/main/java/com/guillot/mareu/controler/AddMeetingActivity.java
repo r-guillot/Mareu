@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,10 +20,10 @@ import android.widget.TimePicker;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.guillot.mareu.databinding.ActivityAddMeetingBinding;
 import com.guillot.mareu.injection.DI;
 import com.guillot.mareu.service.MeetingApiService;
 import com.guillot.mareu.R;
-import com.guillot.mareu.databinding.ActivityAddBinding;
 import com.guillot.mareu.fragments.DatePickerFragment;
 import com.guillot.mareu.fragments.TimePickerFragment;
 import com.guillot.mareu.model.Meeting;
@@ -34,8 +33,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 
-public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
-    private ActivityAddBinding binding;
+public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
+    private ActivityAddMeetingBinding binding;
     public String textSpinnerMeeting;
     private MeetingApiService mApiService;
     private String emailResult = "";
@@ -43,7 +42,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_add_meeting);
 
         mApiService = DI.getMeetingApiService();
 
@@ -57,12 +56,14 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     }
 
     public void viewBinding() {
-        binding = ActivityAddBinding.inflate(getLayoutInflater());
+        binding = ActivityAddMeetingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
     }
 
-    //open a dialogFragment with datePicker
+    /**
+     * open a dialogFragment with datePicker
+     */
     public void dateClickListener() {
         binding.buttonDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +74,9 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         });
     }
 
-    //set date to text view
+    /**
+     * set date to text view
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
@@ -84,30 +87,39 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         String currentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
 
         binding.textviewDate.setText(currentDateString);
+        binding.textviewDate.setError(null);
     }
 
-    //open a dialogFragment with timePicker
+    /**
+     * open a dialogFragment with timePicker
+     */
     public void hourClickListener() {
         binding.buttonHour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
-                Log.e("logee","timepicker"+timePicker);
             }
         });
     }
 
-    //set time to text view
+    /**
+     * set time to text view
+     *
+     * @param view
+     * @param hourOfDay
+     * @param minute
+     */
     @SuppressLint("StringFormatMatches")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         binding.textviewHour.setText(getString(R.string.h, hourOfDay, minute));
-        Log.e("logee", "heure"+hourOfDay );
-        Log.e("logee","minute"+minute);
+        binding.textviewHour.setError(null);
     }
 
-    //set spinner with meetings rooms
+    /**
+     * set spinner with meetings rooms
+     */
     public void setSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.meeting_rooms, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,7 +127,15 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         binding.spinnerMeeting.setOnItemSelectedListener(this);
     }
 
-    //get meeting room from spinner
+    /**
+     * get meeting room from spinner
+     *
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         textSpinnerMeeting = parent.getItemAtPosition(position).toString();
@@ -125,7 +145,9 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    //create chip for email address
+    /**
+     * create chip for email address
+     */
     public void createChip() {
         binding.emailEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -138,24 +160,28 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
                             binding.emailEditText.setText("");
                         } else if (email.contains(" ")) {
                             binding.emailEditText.setError(getString(R.string.error_space));
-                        }
-                        else {
+                        } else {
                             binding.emailEditText.setError(getString(R.string.error_format));
                         }
                     } else {
                         binding.emailEditText.setError(getString(R.string.error_empty));
                     }
-                return true;
+                    return true;
                 }
                 return false;
             }
         });
     }
 
-    //add chip to chipGroup
+    /**
+     * add chip to chipGroup
+     *
+     * @param text
+     * @param chipGroup
+     */
     private void addChipToGroup(String text, final ChipGroup chipGroup) {
         final Chip chip = new Chip(this);
-        chip.setChipDrawable(ChipDrawable.createFromResource(this,R.xml.chip));
+        chip.setChipDrawable(ChipDrawable.createFromResource(this, R.xml.chip));
         chip.setText(text);
         chipGroup.addView(chip);
         chip.isCloseIconVisible();
@@ -167,18 +193,24 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         });
     }
 
-    //convert all chips in a string and get it
+    /**
+     * convert all chips in a string and get i
+     */
     public void getEmailFromChipGroup() {
         ChipGroup chipGroup = binding.chipGroup;
 
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
 
             Chip chip = (Chip) chipGroup.getChildAt(i);
-            emailResult = emailResult.trim()+" "+chip.getText().toString().trim();
+            emailResult = emailResult.trim() + " " + chip.getText().toString().trim();
         }
     }
 
-    //create new meeting
+    /**
+     * create new meeting
+     *
+     * @throws ParseException
+     */
     public void createMeeting() throws ParseException {
         Meeting meeting = new Meeting(
                 binding.textviewDate.getText().toString(),
@@ -190,7 +222,13 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         mApiService.createMeeting(meeting);
     }
 
-    //check if all field are complete
+
+    /**
+     * check if all field are complete
+     *
+     * @return
+     */
+
     public boolean validateDate() {
         if (binding.textviewDate.getText().toString().isEmpty()) {
             binding.textviewDate.setError(getString(R.string.error_date));
@@ -212,7 +250,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     }
 
     public boolean validateTopic() {
-        if (binding.textInputLayoutTopic.getEditText().toString().isEmpty()) {
+        if (binding.textInputLayoutTopic.getEditText().getText().toString().isEmpty()) {
             binding.textInputLayoutTopic.setError(getString(R.string.error_topic));
             return false;
         } else {
@@ -232,22 +270,24 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         }
     }
 
-    //if every fields are complete create new meeting and finish the activity if not error appears on screen
+    /**
+     * if every fields are complete create new meeting and finish the activity if not error appears on screen
+     */
     public void validation() {
-            binding.buttonValidation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!validateDate() | !validateTime() | !validateTopic() | !validateEmail()) {
-                      return;
-                    }
-                    try {
-                        createMeeting();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    finish();
+        binding.buttonValidation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!validateDate() | !validateTime() | !validateTopic() | !validateEmail()) {
+                    return;
                 }
-            });
+                try {
+                    createMeeting();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                finish();
+            }
+        });
     }
 }
 

@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/meeting_item"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image_meeting"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/ic_circle"
         android:layout_margin="15dp"
-        />
+        android:src="@drawable/ic_circle" />
 
     <TextView
         android:id="@+id/text_meeting_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/image_meeting"
         android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        />
+        android:layout_toEndOf="@+id/image_meeting"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/text_meeting_participant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_meeting_info"
+        android:layout_toStartOf="@id/trash_button"
         android:layout_toEndOf="@+id/image_meeting"
-        android:maxLines="1"
-
         android:ellipsize="end"
-        />
+        android:maxLines="1" />
 
     <ImageButton
         android:id="@+id/trash_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/delete_button"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:backgroundTint="@color/white"
-        />
-
+        android:src="@drawable/delete_button" />
 
 
 </RelativeLayout>
