@@ -40,12 +40,13 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
 
         viewBinding();
         setListeners();
+        openFragment();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        openFragment();
+//        openFragment();
     }
 
     public void viewBinding() {
