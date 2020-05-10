@@ -13,7 +13,7 @@ public class MeetingListService {
 
     public static List<Meeting> MEETING_LIST = Arrays.asList(
             new Meeting("01/07/2020", "14h00", "Réunion A", "Valorant", "cypher@gmail.com omen@hotmail.com breach@yahoo.fr"),
-            new Meeting("17/09/2020", "8h00", "Réunion B", "Cyberpunk", "mike_pondsmith@gmail.com konrad@caramail.com")
+            new Meeting("17/09/2020", "08h00", "Réunion B", "Cyberpunk", "mike_pondsmith@gmail.com konrad@caramail.com")
     );
 
     static List<Meeting> generateMeetings() {

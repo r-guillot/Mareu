@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityListMeetingBinding binding;
-    private String filterText;
+    String filterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,54 +82,16 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
                 return true;
 
             case R.id.reu_a:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_a)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_b:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_b)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_c:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_c)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_d:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_d)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_e:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_e)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_f:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_f)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_g:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_g)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_h:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_h)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_i:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_i)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
-                return true;
             case R.id.reu_j:
-                Toast.makeText(this, getString(R.string.place_filter, getString(R.string.reu_j)), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
+                applySelectedFilter(item, filterText);
                 return true;
 
             case R.id.filter_reset:
@@ -139,6 +101,12 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void applySelectedFilter(MenuItem item, String filterText) {
+        filterText = item.getTitle().toString();
+        Toast.makeText(this, getString(R.string.place_filter, filterText), Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new FilterPlaceEvent(filterText));
     }
 
     /**

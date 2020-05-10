@@ -7,6 +7,8 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -52,7 +54,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         setSpinner();
         createChip();
         validation();
-
+        setTopicErrorNull();
     }
 
     public void viewBinding() {
@@ -135,7 +137,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
      * @param position
      * @param id
      */
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         textSpinnerMeeting = parent.getItemAtPosition(position).toString();
@@ -143,6 +144,26 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    /**
+     * reset error on topiclayout when a text is enter
+     */
+    public void setTopicErrorNull() {
+        binding.textInputEditLayoutTopic.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                binding.textInputLayoutTopic.setError(null);
+            }
+        });
     }
 
     /**
@@ -154,6 +175,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String email = textView.getText().toString().trim();
+                    binding.textInputLayoutEmail.setError(null);
                     if (!email.isEmpty()) {
                         if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                             addChipToGroup(email, binding.chipGroup);
@@ -208,10 +230,8 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     /**
      * create new meeting
-     *
-     * @throws ParseException
      */
-    public void createMeeting() throws ParseException {
+    public void createMeeting() {
         Meeting meeting = new Meeting(
                 binding.textviewDate.getText().toString(),
                 binding.textviewHour.getText().toString(),
@@ -228,7 +248,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
      *
      * @return
      */
-
     public boolean validateDate() {
         if (binding.textviewDate.getText().toString().isEmpty()) {
             binding.textviewDate.setError(getString(R.string.error_date));
@@ -280,11 +299,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
                 if (!validateDate() | !validateTime() | !validateTopic() | !validateEmail()) {
                     return;
                 }
-                try {
-                    createMeeting();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                createMeeting();
                 finish();
             }
         });

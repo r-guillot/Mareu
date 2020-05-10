@@ -23,7 +23,7 @@
     <string name="reu_i">Réunion I</string>
     <string name="reu_j">Réunion J</string>
 
-    <string name="h">%1$sH%2$s</string>
+    <string name="h">%1$sh%2$s</string>
 
     <string name="error_space">Veuillez insérer une seule adresse mail à la fois ou supprimer les espaces</string>
     <string name="error_empty">Des participants doivent être ajoutés</string>
