@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityListMeetingBinding binding;
-    String filterText;
+    public String filterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
