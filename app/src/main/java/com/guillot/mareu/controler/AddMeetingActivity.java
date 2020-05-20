@@ -37,7 +37,7 @@ import java.util.Calendar;
 
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
     private ActivityAddMeetingBinding binding;
-    public String textSpinnerMeeting;
+    private String textSpinnerMeeting;
     private MeetingApiService mApiService;
     private String emailResult = "";
 
@@ -115,7 +115,9 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @SuppressLint("StringFormatMatches")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        binding.textviewHour.setText(getString(R.string.h, hourOfDay, minute));
+        @SuppressLint("DefaultLocale") String stringHour = String.format("%02d", hourOfDay);
+        @SuppressLint("DefaultLocale") String stringMinute = String.format("%02d", minute);
+        binding.textviewHour.setText(getString(R.string.h, stringHour, stringMinute));
         binding.textviewHour.setError(null);
     }
 

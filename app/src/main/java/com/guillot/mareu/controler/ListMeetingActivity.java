@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityListMeetingBinding binding;
-    public String filterText;
+    private String filterText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        filterText = item.getTitle().toString();
         switch (item.getItemId()) {
             case R.id.filter_date:
                 Toast.makeText(this, getString(R.string.date_filter), Toast.LENGTH_SHORT).show();
@@ -91,21 +92,18 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
             case R.id.reu_h:
             case R.id.reu_i:
             case R.id.reu_j:
-                applySelectedFilter(item, filterText);
+                applySelectedFilter(item, getString(R.string.place_filter, filterText));
                 return true;
 
             case R.id.filter_reset:
-                Toast.makeText(this, getString(R.string.filter_reset), Toast.LENGTH_SHORT).show();
-                filterText = item.getTitle().toString();
-                EventBus.getDefault().post(new FilterPlaceEvent(filterText));
+                applySelectedFilter(item,  getString(R.string.filter_reset));
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void applySelectedFilter(MenuItem item, String filterText) {
-        filterText = item.getTitle().toString();
-        Toast.makeText(this, getString(R.string.place_filter, filterText), Toast.LENGTH_SHORT).show();
+    private void applySelectedFilter(MenuItem item, String toastMessage) {
+        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
         EventBus.getDefault().post(new FilterPlaceEvent(filterText));
     }
 

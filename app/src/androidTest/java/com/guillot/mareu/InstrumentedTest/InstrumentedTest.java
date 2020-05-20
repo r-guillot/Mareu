@@ -57,7 +57,7 @@ import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtP
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
 
-    private static int ITEMS_COUNT = 2;
+    private static int ITEMS_COUNT = 3;
 
     @Rule
     public ActivityTestRule<ListMeetingActivity> mActivityTestRule =
@@ -80,7 +80,7 @@ public class InstrumentedTest {
                 .atPosition(1)
                 .perform(click());
 
-        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
+        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT - 2));
     }
 
     @Test
@@ -92,8 +92,7 @@ public class InstrumentedTest {
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2020, 07, 01));
         onView(withId(android.R.id.button1)).perform(click());
 
-        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
-
+        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT - 2));
     }
 
     @Test
