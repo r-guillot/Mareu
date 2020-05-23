@@ -56,7 +56,7 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         final Meeting currentMeeting = mMeetings.get(position);
 
-        final String meetingInfo = currentMeeting.getPlace() + " - " + (currentMeeting.getHour()) + " - " + currentMeeting.getTopic();
+        String meetingInfo = currentMeeting.getPlace() + " - " + (currentMeeting.getHour()) + " - " + currentMeeting.getTopic();
         holder.binding.textMeetingInfo.setText(meetingInfo);
         holder.binding.textMeetingParticipant.setText((currentMeeting.getParticipant()).trim().replace(" ", ", "));
         holder.binding.imageMeeting.setColorFilter(generateRandomColor());

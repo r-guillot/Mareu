@@ -5,12 +5,13 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import androidx.appcompat.widget.MenuPopupWindow;
+import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-import androidx.transition.Transition;
 
 import com.guillot.mareu.R;
 import com.guillot.mareu.controler.ListMeetingActivity;
@@ -18,7 +19,6 @@ import com.guillot.mareu.utils.DeleteViewAction;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +27,7 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
-import static androidx.test.espresso.action.ViewActions.pressKey;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -80,12 +78,13 @@ public class InstrumentedTest {
                 .atPosition(1)
                 .perform(click());
 
-        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT - 2));
+        onView(allOf(ViewMatchers.withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(1));
     }
 
     @Test
     public void myMeetingList_filterDate_shouldFilterByDate() {
-        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT));
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Réinitialiser les filtres")).perform(click());
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Filtrer par Date")).perform(click());
@@ -119,13 +118,12 @@ public class InstrumentedTest {
         onView(withId(R.id.button_validation)).perform(scrollTo(), click());
 
         onView(allOf(ViewMatchers.withId(R.id.recyclerview_meeting), isDisplayed()));
-
     }
 
     @Test
     public void myMeetingList_deleteAction_shouldRemoveItem() {
         onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT));
-        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
+        onView(allOf(withId(R.id.recyclerview_meeting), isDisplayed())).perform(actionOnItemAtPosition(2, new DeleteViewAction()));
         onView(withText(R.string.alert)).check(matches(isDisplayed()));
         onView(withId(android.R.id.button1)).perform(click());
 

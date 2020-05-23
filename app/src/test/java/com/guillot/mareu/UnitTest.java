@@ -59,4 +59,14 @@ public class UnitTest {
         meetingsFiltered = service.getPlaceFiltered(filterText);
         assertFalse(meetingsFiltered.containsAll(meetingsAll));
     }
+
+    @Test
+    public void filterMeetingByDate() {
+        List<Meeting> meetingsAll = service.getMeetings();
+        String filterDate = "01/07/2020";
+        List<Meeting> meetingsFiltered;
+        meetingsFiltered = service.getDateFiltered(filterDate);
+        assertFalse(meetingsAll.isEmpty());
+        assertFalse(meetingsFiltered.containsAll(meetingsAll));
+    }
 }
